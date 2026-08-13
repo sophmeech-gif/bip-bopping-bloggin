@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bip Bopping Bloggin
 
-## Getting Started
+Your girly, chaotic little corner of the internet. Built with Next.js +
+Tailwind, blog posts are plain Markdown files, comments run on Giscus (free,
+no ads, no tracking junk).
 
-First, run the development server:
+## Running it locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Writing a new post
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Add a new `.md` file to `src/content/posts/`. The filename becomes the URL
+(e.g. `my-new-post.md` → `/blog/my-new-post`). Frontmatter format:
 
-## Learn More
+```markdown
+---
+title: "your funny title here"
+date: "2026-08-13"
+excerpt: "one or two sentences that show up on the blog list card"
+mood: "🎀"
+---
 
-To learn more about Next.js, take a look at the following resources:
+your post content, written like a normal human blog post, in Markdown.
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+That's it — it'll show up on the home page and `/blog` automatically, newest
+first.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Turning on comments (Giscus)
 
-## Deploy on Vercel
+Comments currently show a "not hooked up yet" placeholder. To switch them on:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Make sure the code for this site lives in a **public GitHub repo** (Giscus
+   needs this — it stores comments as GitHub Discussions behind the scenes,
+   but visitors never see GitHub, it just looks like normal comments).
+2. In that repo's settings, enable **Discussions** (Settings → General →
+   Features → Discussions).
+3. Install the [giscus app](https://github.com/apps/giscus) on the repo.
+4. Go to [giscus.app](https://giscus.app), enter your repo, pick the
+   "Discussion Title contains page pathname" mapping, pick a category (`General`
+   is fine), and it'll generate a config block with a `repo`, `repoId`,
+   `category`, and `categoryId`.
+5. Copy `.env.local.example` to `.env.local` and fill those four values in.
+6. Restart the dev server. Comments will now appear on every post.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+When you deploy (below), add the same four `NEXT_PUBLIC_GISCUS_*` variables
+in your host's environment variable settings too.
+
+## Deploying
+
+The simplest path for a Next.js site like this is **Vercel** (made by the
+Next.js team, free tier is plenty for a blog):
+
+1. Push this project to a GitHub repo.
+2. Go to [vercel.com/new](https://vercel.com/new), sign in, and import that
+   repo.
+3. Add your `NEXT_PUBLIC_GISCUS_*` environment variables in the project
+   settings if you've set up comments.
+4. Deploy — you'll get a free `.vercel.app` URL immediately.
+
+## Connecting your own domain
+
+1. **Buy the domain** yourself from a registrar (Namecheap, Cloudflare, Squarespace Domains, etc). Nobody but you should ever touch your registrar account/payment details.
+2. In your Vercel project → **Settings → Domains**, add your domain.
+3. Vercel will show you one or two DNS records to add (usually an `A` record
+   for the root domain and a `CNAME` for `www`). Add those records in your
+   registrar's DNS settings page.
+4. DNS changes can take anywhere from a few minutes to ~24 hours to propagate.
+   Vercel's domain settings page will show a green checkmark once it's live.
+
+## Project structure
+
+```
+src/
+  app/
+    page.tsx              home page
+    blog/page.tsx          blog listing
+    blog/[slug]/page.tsx   individual post + comments
+  components/               Navbar, Footer, PostCard, Comments
+  content/posts/*.md         your blog posts
+  lib/posts.ts                reads & parses the markdown files
+```

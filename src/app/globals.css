@@ -1,26 +1,135 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-pink: #f0407a;
+  --color-pink-deep: #c21f5b;
+  --color-pink-pale: #ffe3ee;
+  --color-mint: #c3f2a8;
+  --color-mint-deep: #7fbf6a;
+  --color-cream: #fff6e9;
+  --color-butter: #ffd766;
+  --color-ink: #2a0f1c;
+  --background: var(--color-cream);
+  --foreground: var(--color-ink);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-pink: var(--color-pink);
+  --color-pink-deep: var(--color-pink-deep);
+  --color-pink-pale: var(--color-pink-pale);
+  --color-mint: var(--color-mint);
+  --color-mint-deep: var(--color-mint-deep);
+  --color-cream: var(--color-cream);
+  --color-butter: var(--color-butter);
+  --color-ink: var(--color-ink);
+  --font-display: var(--font-display);
+  --font-heading: var(--font-heading);
+  --font-sans: var(--font-body);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--color-ink);
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), sans-serif;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(42, 15, 28, 0.08) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading), sans-serif;
+}
+
+::selection {
+  background: var(--color-mint);
+  color: var(--color-ink);
+}
+
+/* wobbly hand-drawn-ish border, used instead of perfect rounded rects */
+.wobble-border {
+  border: 3px solid var(--color-ink);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+}
+
+.wobble-border-alt {
+  border: 3px solid var(--color-ink);
+  border-radius: 15px 225px 15px 255px / 225px 15px 255px 15px;
+}
+
+/* squiggly underline */
+.squiggle-underline {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='8' viewBox='0 0 40 8'%3E%3Cpath d='M0 4C5 0 10 8 15 4C20 0 25 8 30 4C33 1.5 36 1.5 40 4' stroke='%232a0f1c' stroke-width='2.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: bottom 2px left;
+  background-size: 26px 8px;
+}
+
+/* marquee ticker */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 22s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.blob-shadow {
+  box-shadow: 6px 6px 0 0 var(--color-ink);
+}
+
+.blob-shadow-pink {
+  box-shadow: 6px 6px 0 0 var(--color-pink-deep);
+}
+
+.post-content {
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+
+.post-content p {
+  margin-bottom: 1.4em;
+}
+
+.post-content strong {
+  color: var(--color-pink-deep);
+}
+
+.post-content ul {
+  list-style: none;
+  margin: 1.4em 0;
+  padding: 0;
+}
+
+.post-content li {
+  position: relative;
+  padding-left: 1.6em;
+  margin-bottom: 0.6em;
+}
+
+.post-content li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  color: var(--color-pink-deep);
+}
+
+.post-content a {
+  color: var(--color-pink-deep);
+  text-decoration: underline;
+  text-decoration-style: wavy;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
 }
