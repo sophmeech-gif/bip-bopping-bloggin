@@ -32,11 +32,10 @@ export default function Home() {
             Bloggin
           </h1>
           <p className="mt-6 font-heading text-cream text-lg sm:text-xl max-w-xl mx-auto">
-            the internet diary of a city girl with 12 work tabs open, a
-            fantasy-novel-induced romance complex, and way too many feelings
-            about iced lattes. overthinking, situationship recaps, and
-            unsolicited opinions, published whenever the mood (or the
-            caffeine) strikes.
+            the internet diary of a city girl with a fantasy-novel-induced
+            romance complex, and way too many feelings about iced lattes.
+            overthinking, situationship recaps, and unsolicited opinions,
+            published whenever the mood (or the caffeine) strikes.
           </p>
           <Link
             href="/blog"
