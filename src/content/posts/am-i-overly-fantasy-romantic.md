@@ -1,7 +1,7 @@
 ---
 title: "Am I overly fantasy romantic?"
 date: "2026-08-01"
-excerpt: "asking the real questions: knight on a horse, hot vampire, or full send Violet-and-Xaden brain rot? asking for a friend (me)."
+excerpt: "asking the real questions: knight on a horse, hot vampire, or Violet-and-Xaden brain rot? asking for a friend (me)."
 mood: "🦇"
 ---
 
