@@ -19,8 +19,10 @@ export async function getPool() {
         id SERIAL PRIMARY KEY,
         slug TEXT NOT NULL,
         body TEXT NOT NULL,
+        parent_id INTEGER REFERENCES comments(id) ON DELETE CASCADE,
         created_at TIMESTAMPTZ NOT NULL DEFAULT now()
       );
+      ALTER TABLE comments ADD COLUMN IF NOT EXISTS parent_id INTEGER REFERENCES comments(id) ON DELETE CASCADE;
       CREATE INDEX IF NOT EXISTS comments_slug_idx ON comments (slug);
     `);
     initialized = true;
@@ -31,5 +33,6 @@ export async function getPool() {
 export type Comment = {
   id: number;
   body: string;
+  parent_id: number | null;
   created_at: string;
 };

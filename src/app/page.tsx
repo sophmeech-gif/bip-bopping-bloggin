@@ -47,6 +47,19 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="mx-auto max-w-3xl px-5 pt-16">
+        <div className="wobble-border-alt bg-mint blob-shadow p-6 sm:p-8 text-center">
+          <p className="font-heading font-bold text-ink text-lg sm:text-xl">
+            heads up: this is opinion and thoughts based writing, not advice,
+            not facts, just vibes.
+          </p>
+          <p className="mt-3 text-ink/80">
+            hop on, read, and comment if you relate in the slightest, girlies.
+            so I know I&apos;m not out here spiraling alone.
+          </p>
+        </div>
+      </section>
+
       <section className="mx-auto max-w-4xl px-5 py-16">
         <div className="flex items-end justify-between mb-8">
           <h2 className="font-heading text-3xl font-extrabold text-ink">

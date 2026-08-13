@@ -10,7 +10,7 @@ export async function GET(request: Request) {
 
   const pool = await getPool();
   const result = await pool.query(
-    "SELECT id, body, created_at FROM comments WHERE slug = $1 ORDER BY created_at ASC",
+    "SELECT id, body, parent_id, created_at FROM comments WHERE slug = $1 ORDER BY created_at ASC",
     [slug]
   );
 
@@ -18,7 +18,7 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const { slug, body } = await request.json();
+  const { slug, body, parentId } = await request.json();
 
   if (typeof slug !== "string" || !slug.trim()) {
     return Response.json({ error: "missing slug" }, { status: 400 });
@@ -29,11 +29,14 @@ export async function POST(request: Request) {
   if (body.length > MAX_LENGTH) {
     return Response.json({ error: "comment too long" }, { status: 400 });
   }
+  if (parentId !== undefined && parentId !== null && !Number.isInteger(parentId)) {
+    return Response.json({ error: "invalid parent" }, { status: 400 });
+  }
 
   const pool = await getPool();
   const result = await pool.query(
-    "INSERT INTO comments (slug, body) VALUES ($1, $2) RETURNING id, body, created_at",
-    [slug, body.trim()]
+    "INSERT INTO comments (slug, body, parent_id) VALUES ($1, $2, $3) RETURNING id, body, parent_id, created_at",
+    [slug, body.trim(), parentId ?? null]
   );
 
   return Response.json({ comment: result.rows[0] }, { status: 201 });
