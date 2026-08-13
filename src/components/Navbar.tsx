@@ -41,6 +41,9 @@ export default function Navbar() {
             <Link href="/blog" className="squiggle-underline pb-0.5 hover:text-mint">
               the blog
             </Link>
+            <Link href="/contact" className="squiggle-underline pb-0.5 hover:text-mint">
+              say hi
+            </Link>
           </div>
         </div>
       </nav>
