@@ -3,10 +3,8 @@ import Link from "next/link";
 const tickerItems = [
   "certified overthinker",
   "certified 5 foot one girl",
-  "professional tangent-haver",
   "seven coffees a day, minimum",
   "still manifesting a vampire boyfriend",
-  "12 work tabs, 1 blog tab",
   "runs a bit, emphasis on a bit",
   "mind going 100mph, 24/7",
   "am i normal? tbd",
