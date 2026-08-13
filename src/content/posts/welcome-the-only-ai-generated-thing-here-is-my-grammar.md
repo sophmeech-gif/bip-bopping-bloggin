@@ -1,6 +1,6 @@
 ---
 title: "welcome to bip bopping bloggin (the only AI generated thing here is my grammar)"
-date: "2026-08-13"
+date: "2026-07-30"
 excerpt: "23 in 11 days, currently ignoring my corporate job to write this instead of finishing my birthday plans. an overshare, as promised."
 mood: "💌"
 ---
