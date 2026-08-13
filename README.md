@@ -1,8 +1,8 @@
 # Bip Bopping Bloggin
 
 Your girly, chaotic little corner of the internet. Built with Next.js +
-Tailwind, blog posts are plain Markdown files, comments run on Giscus (free,
-no ads, no tracking junk).
+Tailwind, blog posts are plain Markdown files, comments are a custom box
+backed by Postgres (no login, no account, just a name-free comment).
 
 ## Running it locally
 
@@ -32,25 +32,22 @@ your post content, written like a normal human blog post, in Markdown.
 That's it — it'll show up on the home page and `/blog` automatically, newest
 first.
 
-## Turning on comments (Giscus)
+## Turning on comments
 
-Comments currently show a "not hooked up yet" placeholder. To switch them on:
+Comments need a Postgres database to store them in (the table is created
+automatically the first time the app runs, no manual migration needed).
 
-1. Make sure the code for this site lives in a **public GitHub repo** (Giscus
-   needs this — it stores comments as GitHub Discussions behind the scenes,
-   but visitors never see GitHub, it just looks like normal comments).
-2. In that repo's settings, enable **Discussions** (Settings → General →
-   Features → Discussions).
-3. Install the [giscus app](https://github.com/apps/giscus) on the repo.
-4. Go to [giscus.app](https://giscus.app), enter your repo, pick the
-   "Discussion Title contains page pathname" mapping, pick a category (`General`
-   is fine), and it'll generate a config block with a `repo`, `repoId`,
-   `category`, and `categoryId`.
-5. Copy `.env.local.example` to `.env.local` and fill those four values in.
-6. Restart the dev server. Comments will now appear on every post.
+1. In your Vercel project → **Storage** tab → create a Postgres database
+   (Vercel walks you through it, usually via the Neon integration) → **Connect**
+   it to this project. Vercel will show you a connection string.
+2. Copy `.env.local.example` to `.env.local` and paste that connection string
+   in as `POSTGRES_URL`.
+3. Restart the dev server. Comments will now work on every post, no sign-in
+   required to leave one.
 
-When you deploy (below), add the same four `NEXT_PUBLIC_GISCUS_*` variables
-in your host's environment variable settings too.
+When you deploy (below), connecting the database in Vercel's dashboard
+automatically adds the `POSTGRES_URL` environment variable to your project,
+no manual copy-paste needed there.
 
 ## Deploying
 
@@ -60,8 +57,8 @@ Next.js team, free tier is plenty for a blog):
 1. Push this project to a GitHub repo.
 2. Go to [vercel.com/new](https://vercel.com/new), sign in, and import that
    repo.
-3. Add your `NEXT_PUBLIC_GISCUS_*` environment variables in the project
-   settings if you've set up comments.
+3. Connect a Postgres database (see "Turning on comments" above) if you want
+   comments live.
 4. Deploy — you'll get a free `.vercel.app` URL immediately.
 
 ## Connecting your own domain
@@ -82,7 +79,7 @@ src/
     page.tsx              home page
     blog/page.tsx          blog listing
     blog/[slug]/page.tsx   individual post + comments
-  components/               Navbar, Footer, PostCard, Comments
+  components/               Navbar, Footer, PostCard, CommentBox
   content/posts/*.md         your blog posts
   lib/posts.ts                reads & parses the markdown files
 ```

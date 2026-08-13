@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import Comments from "@/components/Comments";
+import CommentBox from "@/components/CommentBox";
 import { formatDate, getAllPosts, getPostBySlug } from "@/lib/posts";
 
 export function generateStaticParams() {
@@ -69,7 +69,7 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
         <h2 className="font-heading text-2xl font-bold text-ink mb-6">
           say something ✦
         </h2>
-        <Comments slug={post.slug} />
+        <CommentBox slug={post.slug} />
       </section>
     </article>
   );
