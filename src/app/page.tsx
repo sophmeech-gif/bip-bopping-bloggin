@@ -1,5 +1,6 @@
 import Link from "next/link";
 import PostCard from "@/components/PostCard";
+import SubscribeForm from "@/components/SubscribeForm";
 import { getAllPosts } from "@/lib/posts";
 
 export default function Home() {
@@ -76,6 +77,10 @@ export default function Home() {
             <PostCard key={post.slug} post={post} index={i} />
           ))}
         </div>
+      </section>
+
+      <section className="mx-auto max-w-3xl px-5 pb-20">
+        <SubscribeForm />
       </section>
     </div>
   );

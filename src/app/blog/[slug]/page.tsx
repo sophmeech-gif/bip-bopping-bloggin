@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import CommentBox from "@/components/CommentBox";
+import SubscribeForm from "@/components/SubscribeForm";
 import { formatDate, getAllPosts, getPostBySlug } from "@/lib/posts";
 
 export function generateStaticParams() {
@@ -61,6 +62,10 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
 
       <div className="post-content text-ink">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
+      </div>
+
+      <div className="mt-12">
+        <SubscribeForm />
       </div>
 
       <hr className="my-12 border-t-[3px] border-ink" />
