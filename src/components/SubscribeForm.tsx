@@ -32,11 +32,11 @@ export default function SubscribeForm() {
       className="wobble-border bg-mint blob-shadow p-6 sm:p-8 text-center"
     >
       <p className="font-heading font-bold text-ink text-lg sm:text-xl">
-        get an email whenever I post ✦
+        help me grow this little chaos community ✦
       </p>
       <p className="mt-2 text-sm text-ink/70">
-        no spam, just new entries (and the occasional extra thought) straight
-        to your inbox.
+        stay up to date with the latest drama, no spam, ever, just new
+        entries straight to your inbox.
       </p>
       <div className="mt-4 flex flex-col sm:flex-row gap-3 justify-center">
         <input
